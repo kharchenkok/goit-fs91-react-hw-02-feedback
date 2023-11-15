@@ -1,18 +1,18 @@
 import React from 'react';
 import style from './Statistics.module.css';
+import capitalizeFirstLetter from '../../helpers/CapitalizeFirstLetter';
 
-const Statistics = ({ good, neutral, bad, total, positivePercentage }) => {
+const Statistics = ({ list, total, positivePercentage }) => {
   return (
     <ul className={style.statistics__list}>
-      <li>
-        Good: <span className={style.good}>{good}</span>
-      </li>
-      <li>
-        Neutral: <span className={style.neutral}>{neutral}</span>
-      </li>
-      <li>
-        Bad: <span className={style.bad}>{bad}</span>
-      </li>
+      {list.map(({ label, value }) => {
+        return (
+          <li key={label}>
+            {capitalizeFirstLetter(label)}:{' '}
+            <span className={style[label]}>{value}</span>
+          </li>
+        );
+      })}
       <li>
         Total: <span>{total}</span>
       </li>

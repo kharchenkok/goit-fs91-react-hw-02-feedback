@@ -2,28 +2,30 @@ import React from 'react';
 import { FaFaceLaugh, FaFaceMeh, FaFaceFrown } from 'react-icons/fa6';
 import style from './FeedbackOptions.module.css';
 import classNames from 'classnames/bind';
+import capitalizeFirstLetter from '../../helpers/CapitalizeFirstLetter';
 
 const cx = classNames.bind(style);
 
 const iconMap = {
-  Good: <FaFaceLaugh />,
-  Neutral: <FaFaceMeh />,
-  Bad: <FaFaceFrown />,
+  good: <FaFaceLaugh />,
+  neutral: <FaFaceMeh />,
+  bad: <FaFaceFrown />,
 };
+
 const FeedbackOptions = ({ options, onLeaveFeedback }) => (
   <div className={style.button__wrapper}>
     {options.map(option => {
-      const buttonClass = cx('button', `button__${option.toLowerCase()}`);
+      const buttonClass = cx('button', `button__${option}`);
       return (
         <button
           key={option}
           type="button"
-          name={option.toLowerCase()}
+          name={option}
           onClick={onLeaveFeedback}
           className={buttonClass}
         >
           {iconMap[option]}
-          {option}
+          {capitalizeFirstLetter(option)}
         </button>
       );
     })}
